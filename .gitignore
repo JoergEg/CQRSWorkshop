@@ -2,6 +2,10 @@
 [Bb]in/
 [Oo]bj/
 
+# Database files
+*.mdf
+*.ldf
+
 # mstest test results
 TestResults
 
