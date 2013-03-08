@@ -1,0 +1,73 @@
+﻿@using System.Web.Optimization
+@model dynamic
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>SignalR Event Protokoll</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        @Styles.Render("~/Content/bootstrap")
+        
+        <style>
+            body { padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */ }
+        </style>
+    </head>
+
+    <body>
+        
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="brand" href="#">SignalR Event Protokoll</a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li class="active"><a href="#">Alle Events</a></li>
+                            <li class="active"><a href="#event1">Event 1</a></li>
+                            <li class="active"><a href="#event2">Event 2</a></li>
+                            <li class="active"><a href="#event3">Event 3</a></li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div id="mySpanTag"></div>
+        </div>
+
+        <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+        <script src="~/Scripts/jquery.signalR-1.0.1.min.js"></script>
+        @Scripts.Render("~/bundles/bootstrap")
+        <script src="~/signalr/hubs"></script>
+        
+        <script type="text/javascript">
+            $(function() {
+                var myHub = $.connection.chatHub;
+                myHub.client.sendMessage = function(data) {
+                    // Html encode display name and message. 
+                    var encodedMsg = $('<div />').text(data).html();
+                    // Add the message to the page. 
+                    $('#mySpanTag').append('<li>' + encodedMsg + '</li>');
+                };
+                $.connection.hub.start(function() {
+                    myHub.server.sendMessage("Hello World 123!");
+                });
+            });
+        </script>
+
+    </body>
+</html>
