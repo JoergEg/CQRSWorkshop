@@ -24,6 +24,7 @@ namespace NerdDinner
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+            EventStoreConfig.RegisterEventStore();
 
             ModelBinderProviders.BinderProviders.Add(new EFModelBinderProvider());
 

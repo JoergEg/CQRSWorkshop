@@ -41,6 +41,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CommonDomain">
+      <HintPath>..\packages\CommonDomain.1.4.0\lib\net40\CommonDomain.dll</HintPath>
+    </Reference>
+    <Reference Include="EventStore">
+      <HintPath>..\packages\EventStore.3.0.11326.44\lib\net40\EventStore.dll</HintPath>
+    </Reference>
+    <Reference Include="EventStore.Serialization.Json">
+      <HintPath>..\packages\EventStore.Serialization.Json.3.0.11326.44\lib\net40\EventStore.Serialization.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.SqlServer.Types, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -169,6 +178,7 @@
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\EventStoreConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -181,12 +191,17 @@
     <Compile Include="Cqrs\Command.cs" />
     <Compile Include="Cqrs\ApplicationServices\HostDinnerApplicationService.cs" />
     <Compile Include="Cqrs\Contracts.cs" />
+    <Compile Include="Cqrs\DomainEvent.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CountryList.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
+    <Compile Include="Infrastructure\AggregateFactory.cs" />
+    <Compile Include="Infrastructure\DelegateAdjuster.cs" />
+    <Compile Include="Infrastructure\Globals.cs" />
+    <Compile Include="Infrastructure\InProcessBus.cs" />
     <Compile Include="ModelBinders\DbGeographyModelBinder.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Dinner.cs" />
@@ -196,6 +211,7 @@
     <Compile Include="Services\GeolocationService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Readme\EventStore.license.txt" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -253,6 +269,8 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Cqrs\Contracts.ddd" />
+    <Content Include="App_Readme\EventStore - Transactional Integrity.docx" />
+    <Content Include="App_Readme\EventStore - Architectural Overview.docx" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />

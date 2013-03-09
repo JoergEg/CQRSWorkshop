@@ -25,7 +25,7 @@ interface Dinner(DinnerId Id)
     // define shortcut for events
     //if ! = IDinnerEvent<DinnerId>
     if ? = Command
-    if ! = Event
+    if ! = DomainEvent
         
     HostDinner?(string hostedBy, string title, DateTime EventDate, string description, string contactPhone, string address, string country)
         // override ToString() for command

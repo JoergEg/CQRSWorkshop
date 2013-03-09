@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using NerdDinner.Cqrs;
 using NerdDinner.Cqrs.ApplicationServices;
+using NerdDinner.Infrastructure;
 using NerdDinner.Models;
 using PagedList;
 
@@ -61,7 +62,7 @@ namespace NerdDinner.Controllers
             if (ModelState.IsValid)
             {
                 var command = new HostDinner(new DinnerId(dinner.DinnerID), User.Identity.Name, dinner.Title, dinner.EventDate, dinner.Description, dinner.ContactPhone, dinner.Address, dinner.Country);
-                new HostDinnerApplicationService(db).When(command);
+                new HostDinnerApplicationService(Globals.Repository).When(command);
                 
                 return RedirectToAction("Index");
             }

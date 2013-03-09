@@ -49,7 +49,7 @@ namespace NerdDinner.Cqrs
         }
     }
     [DataContract(Namespace = "NerdDinner")]
-    public partial class DinnerCreated : Event
+    public partial class DinnerCreated : DomainEvent
     {
         [DataMember(Order = 1)] public DinnerId Id { get; private set; }
         [DataMember(Order = 2)] public string HostedBy { get; private set; }

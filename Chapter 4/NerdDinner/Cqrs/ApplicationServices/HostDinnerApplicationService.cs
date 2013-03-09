@@ -1,19 +1,21 @@
-﻿using NerdDinner.Models;
+﻿using System;
+using CommonDomain.Persistence;
 
 namespace NerdDinner.Cqrs.ApplicationServices
 {
     public class HostDinnerApplicationService : IDinnerApplicationService
     {
-        private readonly NerdDinnerContext _db;
+        private readonly IRepository _repository;
 
-        public HostDinnerApplicationService(NerdDinnerContext db)
+        public HostDinnerApplicationService(IRepository repository)
         {
-            _db = db;
+            _repository = repository;
         }
 
         public void When(HostDinner command)
         {
-            Aggregates.Dinner.HostDinner(command, _db);
+            var dinner = Aggregates.Dinner.HostDinner(command);
+            _repository.Save(dinner, Guid.NewGuid());
         }
     }
 }
