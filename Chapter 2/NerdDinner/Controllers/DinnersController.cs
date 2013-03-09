@@ -5,6 +5,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using NerdDinner.Cqrs.CommandHandlers;
+using NerdDinner.Cqrs.Commands;
 using NerdDinner.Models;
 using PagedList;
 
@@ -61,16 +63,9 @@ namespace NerdDinner.Controllers
         {
             if (ModelState.IsValid)
             {
-                dinner.HostedBy = User.Identity.Name;
-
-                RSVP rsvp = new RSVP();
-                rsvp.AttendeeName = User.Identity.Name;
-
-                dinner.RSVPs = new List<RSVP>();
-                dinner.RSVPs.Add(rsvp);
-
-                db.Dinners.Add(dinner);
-                db.SaveChanges();
+                var command = new HostDinner(User.Identity.Name);
+                new HostDinnerCommandHandler().Handle(command, dinner, db);
+                
                 return RedirectToAction("Index");
             }
 

@@ -81,22 +81,22 @@ NerdDinner._ZoomMap = function(result) {
     }
 }
 NerdDinner._callbackForLocation = function (result) {
-    _ZoomMap(result);
+    //_ZoomMap(result);
 
-    if (result &&
-           result.resourceSets &&
-           result.resourceSets.length > 0 &&
-           result.resourceSets[0].resources &&
-           result.resourceSets[0].resources.length > 0) {
-        // Add a pushpin at the found location
-        var location = new Microsoft.Maps.Location(result.resourceSets[0].resources[0].point.coordinates[0], result.resourceSets[0].resources[0].point.coordinates[1]);
-        var pushpin = new Microsoft.Maps.Pushpin(location);
-        NerdDinner._map.entities.push(pushpin);
+    //if (result &&
+    //       result.resourceSets &&
+    //       result.resourceSets.length > 0 &&
+    //       result.resourceSets[0].resources &&
+    //       result.resourceSets[0].resources.length > 0) {
+    //    // Add a pushpin at the found location
+    //    var location = new Microsoft.Maps.Location(result.resourceSets[0].resources[0].point.coordinates[0], result.resourceSets[0].resources[0].point.coordinates[1]);
+    //    var pushpin = new Microsoft.Maps.Pushpin(location);
+    //    NerdDinner._map.entities.push(pushpin);
 
-        $("#Location").val(location.latitude.toString() + "," + location.longitude.toString());
-        $("#Latitude").val(location.latitude.toString());
-        $("#Longitude").val(location.longitude.toString());
-    }
+    //    $("#Location").val(location.latitude.toString() + "," + location.longitude.toString());
+    //    $("#Latitude").val(location.latitude.toString());
+    //    $("#Longitude").val(location.longitude.toString());
+    //}
 };
 NerdDinner.FindDinnersGivenLocation = function (where) {
     var script = document.createElement("script");

@@ -176,6 +176,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RSVPController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Cqrs\Aggregates\Dinner.cs" />
+    <Compile Include="Cqrs\CommandHandlers\HostDinnerCommandHandler.cs" />
+    <Compile Include="Cqrs\Commands\HostDinner.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
