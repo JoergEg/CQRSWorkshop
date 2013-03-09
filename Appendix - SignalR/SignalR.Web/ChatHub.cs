@@ -4,7 +4,7 @@ namespace SignalR.Web
 {
     public class ChatHub : Hub
     {
-        public void sendMessage(string msg)
+        public void SendMessage(string msg)
         {
             Clients.All.sendMessage(msg);
         }
