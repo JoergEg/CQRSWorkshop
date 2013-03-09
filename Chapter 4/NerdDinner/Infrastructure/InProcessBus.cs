@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using EventStore;
 using EventStore.Dispatcher;
 using NerdDinner.Cqrs;
+using NerdDinner.Cqrs.ApplicationServices;
 
 namespace NerdDinner.Infrastructure
 {
@@ -18,8 +19,7 @@ namespace NerdDinner.Infrastructure
 
         public void Send<T>(T command) where T : Command
         {
-            dynamic commandHandler = GetCommandHandlerForCommand<T>();
-            commandHandler.When(command);
+            RedirectToWhen.InvokeCommand(Globals.ApplicationService, command);
         }
 
         public void RegisterHandler<T>(Action<T> handler) where T : DomainEvent
@@ -31,12 +31,6 @@ namespace NerdDinner.Infrastructure
                 _routes.Add(typeof(T), handlers);
             }
             handlers.Add(DelegateAdjuster.CastArgument<DomainEvent, T>(x => handler(x)));
-        }
-
-        private dynamic GetCommandHandlerForCommand<T>() where T : Command
-        {
-            return null;
-            //return _container.Resolve<Handles<T>>();
         }
 
         public void Dispatch(Commit commit)

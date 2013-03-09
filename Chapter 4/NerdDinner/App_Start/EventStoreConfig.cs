@@ -3,6 +3,7 @@ using CommonDomain.Persistence;
 using CommonDomain.Persistence.EventStore;
 using EventStore;
 using EventStore.Dispatcher;
+using NerdDinner.Cqrs.ApplicationServices;
 using NerdDinner.Infrastructure;
 
 namespace NerdDinner
@@ -20,6 +21,8 @@ namespace NerdDinner
 
             Globals.EventStore = eventStore;
             Globals.Repository = repository;
+
+            Globals.ApplicationService = new HostDinnerApplicationService(Globals.Repository);
         }
 
         private static IStoreEvents GetInitializedEventStore(IDispatchCommits bus)

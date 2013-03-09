@@ -1,4 +1,5 @@
-﻿using CommonDomain.Core;
+﻿using System;
+using CommonDomain.Core;
 
 namespace NerdDinner.Cqrs.Aggregates
 {
@@ -8,6 +9,12 @@ namespace NerdDinner.Cqrs.Aggregates
         {
             RaiseEvent(new DinnerCreated(command.Id, command.HostedBy, command.Title, command.EventDate,
                                          command.Description, command.ContactPhone, command.Address, command.Country));
+        }
+
+        public void Apply(DinnerCreated e)
+        {
+            Id = Guid.NewGuid();
+
         }
 
         public static Dinner HostDinner(HostDinner command)

@@ -202,6 +202,7 @@
     <Compile Include="Infrastructure\DelegateAdjuster.cs" />
     <Compile Include="Infrastructure\Globals.cs" />
     <Compile Include="Infrastructure\InProcessBus.cs" />
+    <Compile Include="Helpers\RedirectToWhen.cs" />
     <Compile Include="ModelBinders\DbGeographyModelBinder.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Dinner.cs" />
