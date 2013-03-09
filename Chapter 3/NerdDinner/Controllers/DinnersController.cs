@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using NerdDinner.Cqrs.CommandHandlers;
-using NerdDinner.Cqrs.Commands;
+using NerdDinner.Cqrs;
+using NerdDinner.Cqrs.ApplicationServices;
 using NerdDinner.Models;
 using PagedList;
 
@@ -63,8 +60,8 @@ namespace NerdDinner.Controllers
         {
             if (ModelState.IsValid)
             {
-                var command = new HostDinner(User.Identity.Name);
-                new HostDinnerCommandHandler().Handle(command, dinner, db);
+                var command = new HostDinner(new DinnerId(dinner.DinnerID), User.Identity.Name, dinner.Title, dinner.EventDate, dinner.Description, dinner.ContactPhone, dinner.Address, dinner.Country);
+                new HostDinnerApplicationService(db).When(command);
                 
                 return RedirectToAction("Index");
             }
