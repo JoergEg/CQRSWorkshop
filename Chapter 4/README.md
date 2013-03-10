@@ -7,7 +7,6 @@ Nerd Dinner CRUD example -> Introduce Event Sourcing
 * have a look how the data is stored in the database right out of the aggregate - ugly? more on this in the next chapter
 * Write unit tests for the following domain logic -> check the published events
 
-
 New additional domain logic:
 -> If a member has submitted his third Nerd Dinner than his status changes to gold member.
 -> a member cannot host/create more then 7 dinners

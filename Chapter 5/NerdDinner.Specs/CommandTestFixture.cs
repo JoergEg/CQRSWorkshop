@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.IO;
 using CommonDomain;
 using NUnit.Framework;
 using NerdDinner.Cqrs;
-using NerdDinner.Models;
 
 namespace NerdDinner.Specs
 {
@@ -35,11 +32,6 @@ namespace NerdDinner.Specs
         [SetUp]
         public void Setup()
         {
-            //Hack for this chapter
-            File.Copy("..\\..\\App_Data\\NerdDinnerContext.mdf", "NerdDinnerContext-20120906143708.mdf", true);
-            File.Copy("..\\..\\App_Data\\NerdDinnerContext_log.ldf", "NerdDinnerContext-20120906143708_log.ldf", true);
-            Database.SetInitializer<NerdDinnerContext>(null);
-
             Repository = new FakeRepository();
             CaughtException = new ThereWasNoExceptionButOneWasExpectedException();
             AggregateRoot = new TAggregateRoot();
@@ -66,16 +58,6 @@ namespace NerdDinner.Specs
             {
                 Finally();
             }
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            //Hack for this chapter
-            if (File.Exists("NerdDinnerContext-20120906143708.mdf"))
-                File.Delete("NerdDinnerContext-20120906143708.mdf");
-            if (File.Exists("NerdDinnerContext-20120906143708_log.ldf"))
-                File.Delete("NerdDinnerContext-20120906143708_log.ldf");
         }
 
         private dynamic BuildCommandHandler()
