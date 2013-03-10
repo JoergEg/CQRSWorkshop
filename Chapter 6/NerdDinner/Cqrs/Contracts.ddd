@@ -1,0 +1,38 @@
+﻿// main namespace for commands and messages
+namespace NerdDinner.Cqrs
+// define data contract namespace for all classes
+extern "NerdDinner"
+
+// define shortcut for interface IIdentity
+if ! = IIdentity
+
+// Simple value object
+// UniverseId!(long id)
+// GalaxyId!(long id)
+DinnerId(Guid id)
+
+// Universe(UniverseId Id, string name)
+
+// define alias
+// const name = string name
+// const dateUtc = DateTime dateUtc
+
+// Define application service IDinnerApplicationService
+interface Dinner(DinnerId Id)
+{
+    // define shortcut for commands
+    //if ? = IDinnerCommand
+    // define shortcut for events
+    //if ! = IDinnerEvent<DinnerId>
+    if ? = Command
+    if ! = DomainEvent
+        
+    HostDinner?(string hostedBy, string title, DateTime EventDate, string description, string contactPhone, string address, string country)
+        // override ToString() for command
+        explicit "host dinner - {title}"
+        DinnerCreated!(string hostedBy, string title, DateTime EventDate, string description, string contactPhone, string address, string country)
+            // override ToString() for event
+            explicit "Dinner {title} created"
+
+
+}
