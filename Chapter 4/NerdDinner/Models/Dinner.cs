@@ -12,7 +12,7 @@ namespace NerdDinner.Models
     public class Dinner
     {
         [HiddenInput(DisplayValue = false)]
-        public int DinnerID { get; set; }
+        public Guid DinnerID { get; set; }
 
         [Required(ErrorMessage = "Title is required")]
         [StringLength(50, ErrorMessage = "Title may not be longer than 50 characters")]
@@ -79,7 +79,7 @@ namespace NerdDinner.Models
     public class LocationDetail
     {
         public DbGeography Location;
-        public int Id;
+        public Guid Id;
         public string Title;
         public string Address;
     }

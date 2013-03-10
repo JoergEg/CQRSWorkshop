@@ -28,7 +28,7 @@ namespace NerdDinner.Controllers
         //
         // GET: /Dinners/Details/5
 
-        public ActionResult Details(int id = 0)
+        public ActionResult Details(Guid id)
         {
             Dinner dinner = db.Dinners.Find(id);
             if (dinner == null)
@@ -61,7 +61,7 @@ namespace NerdDinner.Controllers
         {
             if (ModelState.IsValid)
             {
-                var command = new HostDinner(new DinnerId(dinner.DinnerID), User.Identity.Name, dinner.Title, dinner.EventDate, dinner.Description, dinner.ContactPhone, dinner.Address, dinner.Country);
+                var command = new HostDinner(new DinnerId(Guid.NewGuid()), User.Identity.Name, dinner.Title, dinner.EventDate, dinner.Description, dinner.ContactPhone, dinner.Address, dinner.Country);
                 //new HostDinnerApplicationService(Globals.Repository).When(command);
                 Globals.Bus.Send(command);
                 
@@ -75,7 +75,7 @@ namespace NerdDinner.Controllers
         // GET: /Dinners/Edit/5
 
         [Authorize]
-        public ActionResult Edit(int id = 0)
+        public ActionResult Edit(Guid id)
         {
             Dinner dinner = db.Dinners.Find(id);
             if (dinner == null)
@@ -113,7 +113,7 @@ namespace NerdDinner.Controllers
         // GET: /Dinners/Delete/5
 
         [Authorize]
-        public ActionResult Delete(int id = 0)
+        public ActionResult Delete(Guid id)
         {
             Dinner dinner = db.Dinners.Find(id);
             if (dinner == null)
@@ -131,7 +131,7 @@ namespace NerdDinner.Controllers
         // POST: /Dinners/Delete/5
 
         [HttpPost, ActionName("Delete"), Authorize, ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(Guid id)
         {
             Dinner dinner = db.Dinners.Find(id);
 

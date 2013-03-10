@@ -1,7 +1,6 @@
 ﻿using CommonDomain.Persistence;
 using EventStore;
 using NerdDinner.Cqrs;
-using NerdDinner.Cqrs.ApplicationServices;
 
 namespace NerdDinner.Infrastructure
 {

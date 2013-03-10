@@ -9,7 +9,7 @@ if ! = IIdentity
 // Simple value object
 // UniverseId!(long id)
 // GalaxyId!(long id)
-DinnerId(int id)
+DinnerId(Guid id)
 
 // Universe(UniverseId Id, string name)
 

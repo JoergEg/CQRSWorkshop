@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using EventStore;
 using EventStore.Dispatcher;
 using NerdDinner.Cqrs;
-using NerdDinner.Cqrs.ApplicationServices;
 
 namespace NerdDinner.Infrastructure
 {
@@ -19,7 +18,8 @@ namespace NerdDinner.Infrastructure
 
         public void Send<T>(T command) where T : Command
         {
-            RedirectToWhen.InvokeCommand(Globals.ApplicationService, command);
+            dynamic handler = Globals.ApplicationService;
+            handler.When(command);
         }
 
         public void RegisterHandler<T>(Action<T> handler) where T : DomainEvent

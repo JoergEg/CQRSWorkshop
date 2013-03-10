@@ -13,7 +13,7 @@ namespace NerdDinner.Controllers
 {
     public class JsonDinner
     {
-        public int DinnerID { get; set; }
+        public Guid DinnerID { get; set; }
         public DateTime EventDate { get; set; }
         public string Title { get; set; }
         public double Latitude { get; set; }

@@ -10,10 +10,10 @@ namespace NerdDinner.Cqrs
     [DataContract(Namespace = "NerdDinner")]
     public partial class DinnerId
     {
-        [DataMember(Order = 1)] public int Id { get; private set; }
+        [DataMember(Order = 1)] public Guid Id { get; private set; }
         
         DinnerId () {}
-        public DinnerId (int id)
+        public DinnerId (Guid id)
         {
             Id = id;
         }
