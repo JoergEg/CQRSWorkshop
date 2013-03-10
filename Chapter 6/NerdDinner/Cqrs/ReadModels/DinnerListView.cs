@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using NerdDinner.Models;
+using Dapper;
 
 namespace NerdDinner.Cqrs.ReadModels
 {
@@ -7,27 +10,35 @@ namespace NerdDinner.Cqrs.ReadModels
     {
         public void Handle(DinnerCreated @event)
         {
-            var db = new NerdDinnerContext();
-            var dinner = new Dinner
+            using (var con = new SqlConnection(ConnectionString))
             {
-                Address = @event.Address,
-                ContactPhone = @event.ContactPhone,
-                Country = @event.Country,
-                Description = @event.Description,
-                DinnerID = @event.Id.Id,
-                EventDate = @event.EventDate,
-                HostedBy = @event.HostedBy,
-                Title = @event.Title
-            };
+                con.Open();
+                using (var transaction = con.BeginTransaction())
+                {
+                    var dinner = new Dinner
+                    {
+                        Address = @event.Address,
+                        ContactPhone = @event.ContactPhone,
+                        Country = @event.Country,
+                        Description = @event.Description,
+                        DinnerID = @event.Id.Id,
+                        EventDate = @event.EventDate,
+                        HostedBy = @event.HostedBy,
+                        Title = @event.Title
+                    };
 
-            var rsvp = new RSVP();
-            rsvp.AttendeeName = @event.HostedBy;
+                    con.Execute("INSERT INTO Dinners (DinnerId, Title, EventDate, Description, HostedBy, ContactPhone, Address, Country) VALUES (@DinnerID, @Title, @EventDate, @Description, @HostedBy, @ContactPhone, @Address, @Country)", dinner, transaction);
 
-            dinner.RSVPs = new List<RSVP>();
-            dinner.RSVPs.Add(rsvp);
+                    con.Execute("INSERT INTO RSVPs (DinnerId, AttendeeName) VALUES (@Id, @HostedBy)", new {@event.Id.Id, @event.HostedBy}, transaction);
 
-            db.Dinners.Add(dinner);
-            db.SaveChanges();
+                    transaction.Commit();
+                }
+            }
+        }
+
+        private static string ConnectionString
+        {
+            get { return ConfigurationManager.ConnectionStrings["NerdDinnerContext"].ConnectionString; }
         }
     }
 }
