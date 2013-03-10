@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8BDBF6
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdDinner.Specs", "NerdDinner.Specs\NerdDinner.Specs.csproj", "{AFE5B53B-333D-4CA3-AE6A-4F66AEBD6A0E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{895CEE2D-D913-427F-9BFF-1343EC5CAAC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{895CEE2D-D913-427F-9BFF-1343EC5CAAC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{895CEE2D-D913-427F-9BFF-1343EC5CAAC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFE5B53B-333D-4CA3-AE6A-4F66AEBD6A0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFE5B53B-333D-4CA3-AE6A-4F66AEBD6A0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFE5B53B-333D-4CA3-AE6A-4F66AEBD6A0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFE5B53B-333D-4CA3-AE6A-4F66AEBD6A0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

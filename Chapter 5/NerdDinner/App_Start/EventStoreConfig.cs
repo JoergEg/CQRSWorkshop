@@ -1,9 +1,10 @@
 ﻿using CommonDomain.Core;
-using CommonDomain.Persistence;
 using CommonDomain.Persistence.EventStore;
 using EventStore;
 using EventStore.Dispatcher;
+using NerdDinner.Cqrs;
 using NerdDinner.Cqrs.ApplicationServices;
+using NerdDinner.Cqrs.ReadModels;
 using NerdDinner.Infrastructure;
 
 namespace NerdDinner
@@ -23,6 +24,15 @@ namespace NerdDinner
             Globals.Repository = repository;
 
             Globals.ApplicationService = new HostDinnerApplicationService(Globals.Repository);
+
+            SetupDomainEventHandlers(bus);
+        }
+
+        private static void SetupDomainEventHandlers(IBus bus)
+        {
+            //TODO: Resolve through IoC
+            var view = new DinnerListView();
+            bus.RegisterHandler<DinnerCreated>(view.Handle);
         }
 
         private static IStoreEvents GetInitializedEventStore(IDispatchCommits bus)

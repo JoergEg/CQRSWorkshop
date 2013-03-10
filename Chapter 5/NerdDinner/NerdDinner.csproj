@@ -192,6 +192,8 @@
     <Compile Include="Cqrs\ApplicationServices\HostDinnerApplicationService.cs" />
     <Compile Include="Cqrs\Contracts.cs" />
     <Compile Include="Cqrs\DomainEvent.cs" />
+    <Compile Include="Cqrs\ReadModels\DinnerListView.cs" />
+    <Compile Include="Cqrs\ReadModels\HandlesEvent.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
