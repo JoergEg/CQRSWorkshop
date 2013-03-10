@@ -62,7 +62,14 @@
     <Reference Include="PagedList">
       <HintPath>..\packages\PagedList.1.15.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
+    <Reference Include="Raven.Abstractions">
+      <HintPath>..\packages\RavenDB.Client.2.0.2261\lib\net40\Raven.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.Client.Lightweight">
+      <HintPath>..\packages\RavenDB.Client.2.0.2261\lib\net40\Raven.Client.Lightweight.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
@@ -192,8 +199,9 @@
     <Compile Include="Cqrs\ApplicationServices\HostDinnerApplicationService.cs" />
     <Compile Include="Cqrs\Contracts.cs" />
     <Compile Include="Cqrs\DomainEvent.cs" />
-    <Compile Include="Cqrs\ReadModels\DinnerListView.cs" />
+    <Compile Include="Cqrs\ReadModels\SqlDinnerListView.cs" />
     <Compile Include="Cqrs\ReadModels\HandlesEvent.cs" />
+    <Compile Include="Cqrs\ReadModels\RavenDinnerListView.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -207,7 +215,9 @@
     <Compile Include="ModelBinders\DbGeographyModelBinder.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Dinner.cs" />
-    <Compile Include="Models\NerdDinnerContext.cs" />
+    <Compile Include="Models\NerdDinnerContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Models\RSVP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\GeolocationService.cs" />

@@ -3,7 +3,7 @@ using NerdDinner.Models;
 
 namespace NerdDinner.Cqrs.ReadModels
 {
-    public class DinnerListView : HandlesEvent<DinnerCreated>
+    public class SqlDinnerListView : HandlesEvent<DinnerCreated>
     {
         public void Handle(DinnerCreated @event)
         {

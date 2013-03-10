@@ -1,6 +1,8 @@
 ﻿using CommonDomain.Persistence;
 using EventStore;
 using NerdDinner.Cqrs;
+using Raven.Client;
+using Raven.Client.Document;
 
 namespace NerdDinner.Infrastructure
 {
@@ -13,5 +15,7 @@ namespace NerdDinner.Infrastructure
         public static IRepository Repository { get; set; }
 
         public static IDinnerApplicationService ApplicationService { get; set; }
+
+        public static IDocumentStore RavenDocumentStore { get; set; }
     }
 }

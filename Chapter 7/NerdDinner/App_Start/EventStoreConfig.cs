@@ -6,6 +6,7 @@ using NerdDinner.Cqrs;
 using NerdDinner.Cqrs.ApplicationServices;
 using NerdDinner.Cqrs.ReadModels;
 using NerdDinner.Infrastructure;
+using Raven.Client.Document;
 
 namespace NerdDinner
 {
@@ -24,6 +25,10 @@ namespace NerdDinner
             Globals.Repository = repository;
 
             Globals.ApplicationService = new HostDinnerApplicationService(Globals.Repository);
+            
+            var documentStore = new DocumentStore {Url = "http://localhost:8080/", DefaultDatabase = "NerdDinner"};
+            documentStore.Initialize();
+            Globals.RavenDocumentStore = documentStore;
 
             SetupDomainEventHandlers(bus);
         }
@@ -31,8 +36,11 @@ namespace NerdDinner
         private static void SetupDomainEventHandlers(IBus bus)
         {
             //TODO: Resolve through IoC
-            var view = new DinnerListView();
-            bus.RegisterHandler<DinnerCreated>(view.Handle);
+            var sqlView = new SqlDinnerListView();
+            bus.RegisterHandler<DinnerCreated>(sqlView.Handle);
+
+            var ravenView = new RavenDinnerListView();
+            bus.RegisterHandler<DinnerCreated>(ravenView.Handle);
         }
 
         private static IStoreEvents GetInitializedEventStore(IDispatchCommits bus)
