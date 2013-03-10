@@ -7,6 +7,11 @@ namespace NerdDinner.Cqrs.Aggregates
 {
     public class Dinner : AggregateBase
     {
+        public Dinner()
+        {
+            
+        }
+
         private Dinner(HostDinner command)
         {
             CreateDinnerInDB(command);

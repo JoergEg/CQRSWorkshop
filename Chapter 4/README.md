@@ -16,3 +16,4 @@ New additional domain logic:
 * if something is not possible or allowed in the domain logic be sure to throw a business exception 
 	- have a look at the naming of the business exception
 * discuss the namings of your tests
+* think about why we use Guid instead of int for the DinnerID now
