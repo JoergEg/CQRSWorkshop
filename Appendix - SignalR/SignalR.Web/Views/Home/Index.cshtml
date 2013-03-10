@@ -1,0 +1,74 @@
+﻿@using System.Web.Optimization
+@model dynamic
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <title>SignalR Event Protokoll</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        @Styles.Render("~/Content/bootstrap")
+        
+        <style>
+            body { padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */ }
+            table { table-layout: fixed; }
+            table th, table td { overflow: hidden; }
+        </style>
+    </head>
+
+    <body>
+        
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="brand" href="#">SignalR Event Protokoll</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            @*<div id="mySpanTag"></div>*@
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <th style="width: 20%">Date/Time</th>
+                    <th style="width: 20%">Event Type</th>
+                    <th style="width: 100%">Log Message</th>
+                </thead>
+                <tbody id="tablebody" />
+            </table>
+        </div>
+
+        <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+        <script src="~/Scripts/jquery.signalR-1.0.1.min.js"></script>
+        @Scripts.Render("~/bundles/bootstrap")
+        <script src="~/signalr/hubs"></script>
+        
+        <script type="text/javascript">
+            $(function() {
+                var myHub = $.connection.eventLogHub;
+                myHub.client.logEvent = function(dateTime, eventType, message) {
+                    $('#tablebody').append('<tr><td>' + dateTime + '</td><td>' + eventType + '</td><td>' + message + '</td></tr>');
+                };
+                $.connection.hub.start(function() {
+                    //myHub.server.sendMessage("Hello World 123!");
+                });
+            });
+        </script>
+
+    </body>
+</html>
