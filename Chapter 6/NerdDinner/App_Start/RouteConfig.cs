@@ -14,10 +14,10 @@ namespace NerdDinner
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                    "PrettyDetails",
-                    "{Id}",
-                        new { controller = "Dinners", action = "Details" },
-                        new { Id = @"\d+" }
+                    name: "PrettyDetails",
+                    url: "{Id}",
+                    defaults: new { controller = "Dinners", action = "Details" },
+                    constraints: new { Id = new GuidConstraint() }
                     );
 
             routes.MapRoute(
@@ -25,6 +25,27 @@ namespace NerdDinner
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+        }
+    }
+
+    public class GuidConstraint : IRouteConstraint
+    {
+
+        public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
+        {
+            if (values.ContainsKey(parameterName))
+            {
+                string stringValue = values[parameterName] as string;
+
+                if (!string.IsNullOrEmpty(stringValue))
+                {
+                    Guid guidValue;
+
+                    return Guid.TryParse(stringValue, out guidValue) && (guidValue != Guid.Empty);
+                }
+            }
+
+            return false;
         }
     }
 }
