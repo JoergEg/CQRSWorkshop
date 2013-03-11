@@ -39,7 +39,7 @@ namespace SignalR.Console
                 .MsmqTransport()
                 .UnicastBus()
                 .CreateBus()
-                .Start();
+                .Start(() => Configure.Instance.ForInstallationOn<NServiceBus.Installation.Environments.Windows>().Install());
 
         }
     }
